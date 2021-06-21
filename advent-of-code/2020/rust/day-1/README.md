@@ -1,13 +1,13 @@
 # Day 1
 
-## The challenge:## 
+## The challenge: ## 
 
 ### Part 1: ###
 ```
 Specifically, they need you to find the two entries that sum to 2020 and then multiply those two numbers together.
 ``` 
 
-### Part 2:###
+### Part 2: ###
 ```
 The Elves in accounting are thankful for your help; one of them even offers you a starfish coin they had left over from a past vacation. They offer you a second one if you can find three numbers in your expense report that meet the same criteria.
 ``` 
