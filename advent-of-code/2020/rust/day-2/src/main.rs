@@ -4,30 +4,62 @@ use std::io::BufReader;
 use std::path::Path;
 use std::collections::HashMap;
 
-//impl FromIterator<char> for String
+/* IDEA: Using a hashmap here might be overkill. After all you only need to keep track of one letter
+and its corresponding value 
 
-fn parse(password: &str) {
-  let mut letters = HashMap::new();
-  let mut min = password.as_bytes()[0];
-  let mut max = password.as_bytes()[2];
+NEXT STEPS: implement a buffer that holds a character and then waits for the next char. If the next
+char is not a '\n', add two chars together and convert to int. Otherwise directly convert to int
 
-  println!("min: {}, max: {}", min, max);
-  for c in password.chars() {
+*/
 
-  }
-  letters.insert('c', 0);
-  check_validity();
+struct CharStream {
+  buffer: [char; 3],
+  full: bool,
 }
 
-fn check_validity() -> bool {
-  
+fn create_charstream(buffer: [char; 3], full: bool) -> CharStream {
+  CharStream {
+    buffer: buffer,
+    full: full,
+  }
+}
 
-  return false;
+fn parse(password: &str) {
+  //let mut letters = HashMap::new();
+  let mut min = '0';
+  // let mut max = '0';
+  // let mut ch = '0';
+  let buffer: [char; 3] = ['0'; 3];
+  let full = false;
+  let mut cs = create_charstream(buffer, full);
+  for (i, c) in password.chars().enumerate() {
+    // min, max and char are always at the same position in input.txt
+    if i == 0 {
+      cs.buffer[0] = c;
+      //min = c;
+      println!("First char: {}", cs.buffer[0]);
+    } 
+    // take care of double digit number for min
+    if i == 1 && c != '-' {
+      cs.buffer[1] = c;
+      println!("second char: {}", cs.buffer[1]);
+    }
+    
+    // if i == 2 {
+    //   max = c;
+    // } else if i == 4 {
+    //   ch = c;
+    // } else if i > 6 {
+    //   println!("{}", c);
+    // }
+  }
+
+  println!("min: {}", min);  
+  // println!("max: {}", max);
+  // println!("char to be tested: {}", ch);
 }
 
 fn main() {
-  let valid: i32 = 0;
-
   let path = Path::new("input.txt");
   let display = path.display();
   println!("{}", display);
@@ -49,8 +81,9 @@ fn main() {
 
   */
   let passwords: Vec<&str> = s.lines().collect();
-  for password in &passwords {
-    println!("password: {}", &password);
-    parse(&password);
-  }
+  parse("11-18 s: ksssssssgssssssssk");
+  /*for password in &passwords {
+    //println!("password: {}", password);
+    //parse(&password);
+  }*/
 }
